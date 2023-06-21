@@ -1,2 +1,11 @@
-# HoK-Funnier
-Honor of Kings' toolkit that can make it HoK much funnier
+# 王者快乐器
+**中文版** | [English Version](README-EN.md)
+
+## 简介
+王者荣耀的工具箱，可以让你更加享受王者荣耀给你带来的快乐
+
+## 使用方法
+前往发布，下载并使用，就这么简单
+
+
+
