@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>英雄随机</title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+    <body>
+        <button onclick="refreshImage()">随机抽取</button>
+        <img id="imageContainer" src="" alt="图片">
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                refreshImage();
+            });
+
+            function refreshImage() {
+                const imageContainer = document.getElementById('imageContainer');
+
+                fetch('/random/hero/image')
+                    .then(response => response.blob())
+                    .then(blob => {
+                        imageContainer.src = URL.createObjectURL(blob);
+                    })
+                    .catch(error => {
+                        console.error('获取图片失败:', error);
+                    });
+            }
+        </script>
+    </body>
+</html>
