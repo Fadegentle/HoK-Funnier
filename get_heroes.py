@@ -20,7 +20,7 @@ import argparse
 import os
 import random
 import time
-from typing import List, Any
+from typing import List
 
 import requests
 import sqlite3
@@ -54,16 +54,7 @@ data = []
 headers = {'User-Agent': UserAgent().random}
 
 
-def detail_print(s: Any):
-    """
-    打印细节
-
-    :return: 无
-    ----------------------------------------
-    Print the details
-
-    :return: None
-    """
+def detail_print(s):
     if detail:
         print('----------------------------------------')
         print(s)
@@ -71,19 +62,6 @@ def detail_print(s: Any):
 
 
 def create_heroes_table(cur: Cursor, table: str):
-    """
-    创建表
-
-    :param cur: 游标
-    :param table: 表名
-    :return: 无
-    ----------------------------------------
-    Create table
-
-    :param cur: cursor
-    :param table: table name
-    :return: None
-    """
     create = '''
         CREATE TABLE IF NOT EXISTS heroes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -99,38 +77,11 @@ def create_heroes_table(cur: Cursor, table: str):
 
 
 def insert_data(cur: Cursor, table: str):
-    """
-    插入数据
-
-    :param cur: 游标
-    :param table: 表名
-    :return: 无
-    ----------------------------------------
-    Insert data
-
-    :param cur: cursor
-    :param table: table name
-    :return: None
-    """
     insert = f'INSERT INTO {table} (ename, name, hero_type, hero_type2, skins, skins_num) VALUES (?, ?, ?, ?, ?, ?)'
     cur.executemany(insert, data)
 
 
 def update_data(cur: Cursor, table: str):
-    """
-    更新数据
-
-    :param cur: 游标
-    :param table: 表名
-    :return: 无
-    ----------------------------------------
-    Update data
-
-    :param cur: cursor
-    :param table: table name
-    :return: None
-    """
-
     # 检查表是否为空
     cur.execute(f'SELECT COUNT(*) FROM {table}')
     row_count = cur.fetchone()[0]
@@ -146,19 +97,6 @@ def update_data(cur: Cursor, table: str):
 
 
 def table_is_exist(cur: Cursor ,table: str) -> bool:
-    """
-    检查表是否存在
-
-    :param cur: 游标
-    :param table: 表名
-    :return: 是否存在
-    ----------------------------------------
-    Check if the table exists
-
-    :param cur: cursor
-    :param table: table name
-    :return: is exist
-    """
     query = f'SELECT name FROM sqlite_master WHERE type="table" AND name="{table}"'
     return cur.execute(query).fetchone()
 
@@ -228,21 +166,6 @@ def get_skins_name(ename: str, cname: str) -> List[str]:
 
 
 def get_skin_img(ename: str, cname: str, skin_names: List[str]):
-    """
-    获取皮肤图片
-
-    :param ename: 英雄电子名
-    :param cname: 英雄名字
-    :param skin_names: 皮肤名字列表
-    :return: 无
-    ----------------------------------------
-    Get the skin images
-
-    :param ename: hero's electronic name
-    :param cname: hero's name
-    :param skin_names: list of skin names
-    :return: None
-    """
     for i, n in enumerate(skin_names):
         img_path = f'{save_path}/{cname}/{n}.jpg'
         if os.path.exists(img_path):
