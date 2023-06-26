@@ -5,4 +5,7 @@
 Honor of Kings' toolkit that can make it HoK much funnier
 
 ## Usage
-Go to [release]() and download it, then use it, that's all
+> ps: This project is not even a half-finished product, it is not recommended to use directly, it is recommended to refer to the implementation
+1. Use `git clone` to download this project
+2. Use `python get_heroes.py` to download skin pictures
+3. Enter the `web` path and use `Cargo run` to run the service
