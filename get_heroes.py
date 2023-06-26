@@ -19,14 +19,14 @@
 import argparse
 import os
 import random
+import sqlite3
 import time
+from sqlite3 import Cursor
 from typing import List
 
 import requests
-import sqlite3
 from fake_useragent import UserAgent
 from lxml import etree
-from sqlite3 import Cursor
 
 # 参数获取
 detail_help = '-d/--detail 展示下载详细信息（默认是不显示）\n-d/--detail show download details (default is not show)'
@@ -96,7 +96,7 @@ def update_data(cur: Cursor, table: str):
         print(f"表 {table} 无数据更新")
 
 
-def table_is_exist(cur: Cursor ,table: str) -> bool:
+def table_is_exist(cur: Cursor, table: str) -> bool:
     query = f'SELECT name FROM sqlite_master WHERE type="table" AND name="{table}"'
     return cur.execute(query).fetchone()
 
